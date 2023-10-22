@@ -1,45 +1,111 @@
-import {Open_Sans} from 'next/font/google'
-import Link from "next/link";
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
-
-import './globals.css'
-import styles from "./rootStyle.module.css";
-
-const inter = Open_Sans({
-    subsets: ['latin'],
-    weight: ["400"],
-})
+import Link from 'next/link';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Drawer from '@mui/material/Drawer';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import Divider from '@mui/material/Divider';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import HomeIcon from '@mui/icons-material/Home';
+import StarIcon from '@mui/icons-material/Star';
+import ChecklistIcon from '@mui/icons-material/Checklist';
+import SettingsIcon from '@mui/icons-material/Settings';
+import SupportIcon from '@mui/icons-material/Support';
+import LogoutIcon from '@mui/icons-material/Logout';
+import ThemeRegistry from '@/components/ThemeRegistry/ThemeRegistry';
 
 export const metadata = {
-    title: 'TaskApp Universidad Nacional de Costa Rica',
-    description: 'Aplicación de Guía de Tareas para la Universidad Nacional de Costa Rica',
-}
+    title: 'Next.js App Router + Material UI v5',
+    description: 'Next.js App Router + Material UI v5',
+};
 
-export default function RootLayout({children}) {
+const DRAWER_WIDTH = 240;
+
+const LINKS = [
+    { text: 'Home', href: '/', icon: HomeIcon },
+    { text: 'Tasks', href: '/tasks', icon: ChecklistIcon },
+];
+
+const PLACEHOLDER_LINKS = [
+    { text: 'Settings', href: '/settings', icon: SettingsIcon },
+    { text: 'Support', icon: SupportIcon },
+    { text: 'Logout', icon: LogoutIcon },
+];
+
+export default function RootLayout({ children }) {
     return (
-        <html lang="en" className={inter.className}>
-        <head>
-            <title>Task App | Universidad Nacional de Costa Rica</title>
-            <meta name="viewport" content="width=device-width, initial-scale=1"/>
-            <link rel="icon" href="/favicon.ico"/>
-        </head>
+        <html lang="en">
         <body>
-        <header>
-            <h1 className={styles.h1}>Task App | Universidad Nacional de Costa Rica</h1>
-            <Stack spacing={2} direction="row">
-                <Button variant="contained" href={"/home"}>Home</Button>
-                <Button variant="contained" href="/tasks">Tasks</Button>
-                <Button variant="outlined" href="/settings">Settings</Button>
-            </Stack>
-        </header>
-        <div className={styles.container}>
-            {children}
-        </div>
-        <footer className={styles.footer}>
-            <p>Task App | Universidad Nacional de Costa Rica</p>
-        </footer>
+        <ThemeRegistry>
+            <AppBar position="fixed" sx={{ zIndex: 2000 }}>
+                <Toolbar sx={{ backgroundColor: 'background.paper' }}>
+                    <DashboardIcon sx={{ color: '#444', mr: 2, transform: 'translateY(-2px)' }} />
+                    <Typography variant="h6" noWrap component="div" color="black">
+                        Task App | Universidad de Nacional de Costa Rica
+                    </Typography>
+                </Toolbar>
+            </AppBar>
+            <Drawer
+                sx={{
+                    width: DRAWER_WIDTH,
+                    flexShrink: 0,
+                    '& .MuiDrawer-paper': {
+                        width: DRAWER_WIDTH,
+                        boxSizing: 'border-box',
+                        top: ['48px', '56px', '64px'],
+                        height: 'auto',
+                        bottom: 0,
+                    },
+                }}
+                variant="permanent"
+                anchor="left"
+            >
+                <Divider />
+                <List>
+                    {LINKS.map(({ text, href, icon: Icon }) => (
+                        <ListItem key={href} disablePadding>
+                            <ListItemButton component={Link} href={href}>
+                                <ListItemIcon>
+                                    <Icon />
+                                </ListItemIcon>
+                                <ListItemText primary={text} />
+                            </ListItemButton>
+                        </ListItem>
+                    ))}
+                </List>
+                <Divider sx={{ mt: 'auto' }} />
+                <List>
+                    {PLACEHOLDER_LINKS.map(({ text, href, icon: Icon }) => (
+                        <ListItem key={text} disablePadding>
+                            <ListItemButton href={href}>
+                                <ListItemIcon>
+                                    <Icon />
+                                </ListItemIcon>
+                                <ListItemText primary={text} />
+                            </ListItemButton>
+                        </ListItem>
+                    ))}
+                </List>
+            </Drawer>
+            <Box
+                component="main"
+                sx={{
+                    flexGrow: 1,
+                    bgcolor: 'background.default',
+                    ml: `${DRAWER_WIDTH}px`,
+                    mt: ['48px', '56px', '64px'],
+                    p: 3,
+                }}
+            >
+                {children}
+            </Box>
+        </ThemeRegistry>
         </body>
         </html>
-    )
+    );
 }
