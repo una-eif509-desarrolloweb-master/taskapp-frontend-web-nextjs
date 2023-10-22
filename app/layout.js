@@ -42,10 +42,10 @@ export default function RootLayout({children}) {
         <div className={styles.container}>
             {children}
         </div>
-        </body>
         <footer className={styles.footer}>
             <p>Task App | Universidad Nacional de Costa Rica</p>
         </footer>
+        </body>
         </html>
     )
 }
