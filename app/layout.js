@@ -2,6 +2,7 @@ import {Open_Sans} from 'next/font/google'
 import Link from "next/link";
 
 import './globals.css'
+import styles from "./rootStyle.module.css";
 
 const inter = Open_Sans({
     subsets: ['latin'],
@@ -15,33 +16,36 @@ export const metadata = {
 
 export default function RootLayout({children}) {
     return (
-        <html lang="en">
+        <html lang="en" className={inter.className}>
         <head/>
         <body>
         <header>
-            <h1>Task App | Universidad Nacional de Costa Rica</h1>
+            <h1 className={styles.h1}>Task App | Universidad Nacional de Costa Rica</h1>
             <ul>
                 <li>
-                    <Link href={"/home"}>
+                    <Link className={styles.menuBarLinks} href={"/home"}>
                         Task App
                     </Link>
                 </li>
                 <li>
-                    <Link href="/settings">
+                    <Link className={styles.menuBarLinks} href="/settings">
                         Settings
                     </Link>
                 </li>
                 <li>
-                    <Link href="/tasks">
+                    <Link className={styles.menuBarLinks} href="/tasks">
                         Tasks
                     </Link>
                 </li>
             </ul>
         </header>
-        <div>
+        <div className={styles.container}>
             {children}
         </div>
         </body>
+        <footer className={styles.footer}>
+            <p>Task App | Universidad Nacional de Costa Rica</p>
+        </footer>
         </html>
     )
 }
