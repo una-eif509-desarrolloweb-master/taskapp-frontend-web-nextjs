@@ -1,5 +1,7 @@
 import {Open_Sans} from 'next/font/google'
 import Link from "next/link";
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
 
 import './globals.css'
 import styles from "./rootStyle.module.css";
@@ -25,23 +27,11 @@ export default function RootLayout({children}) {
         <body>
         <header>
             <h1 className={styles.h1}>Task App | Universidad Nacional de Costa Rica</h1>
-            <ul>
-                <li>
-                    <Link className={styles.menuBarLinks} href={"/home"}>
-                        Task App
-                    </Link>
-                </li>
-                <li>
-                    <Link className={styles.menuBarLinks} href="/settings">
-                        Settings
-                    </Link>
-                </li>
-                <li>
-                    <Link className={styles.menuBarLinks} href="/tasks">
-                        Tasks
-                    </Link>
-                </li>
-            </ul>
+            <Stack spacing={2} direction="row">
+                <Button variant="contained" href={"/home"}>Home</Button>
+                <Button variant="contained" href="/tasks">Tasks</Button>
+                <Button variant="outlined" href="/settings">Settings</Button>
+            </Stack>
         </header>
         <div className={styles.container}>
             {children}
