@@ -33,7 +33,7 @@ const LINKS = [
 
 const PLACEHOLDER_LINKS = [
     { text: 'Settings', href: '/settings', icon: SettingsIcon },
-    { text: 'Support', icon: SupportIcon },
+    { text: 'Support', href: '/support', icon: SupportIcon },
     { text: 'Logout', icon: LogoutIcon },
 ];
 
