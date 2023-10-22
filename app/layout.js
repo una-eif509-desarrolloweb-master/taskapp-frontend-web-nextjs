@@ -17,7 +17,11 @@ export const metadata = {
 export default function RootLayout({children}) {
     return (
         <html lang="en" className={inter.className}>
-        <head/>
+        <head>
+            <title>Task App | Universidad Nacional de Costa Rica</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1"/>
+            <link rel="icon" href="/favicon.ico"/>
+        </head>
         <body>
         <header>
             <h1 className={styles.h1}>Task App | Universidad Nacional de Costa Rica</h1>
