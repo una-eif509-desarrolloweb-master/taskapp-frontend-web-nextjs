@@ -3,8 +3,7 @@ import styles from './settings.module.css';
 // Dynamic Data Fetching or Server Side Rendering
 // Def: https://nextjs.org/docs/pages/building-your-application/rendering/server-side-rendering
 async function fetchSettingsData() {
-    const res = await fetch(
-        "https://raw.githubusercontent.com/una-eif509-desarrolloweb-master/taskapp-frontend-web-staticdata/main/static/settings.json",
+    const res = await fetch(process.env.API_SETTINGS_DATA,
         {cache: "no-store"}
     );
 

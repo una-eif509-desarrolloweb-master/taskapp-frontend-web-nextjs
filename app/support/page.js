@@ -3,9 +3,7 @@ import styles from "./support.module.css";
 // Static data fetching
 // Def: https://nextjs.org/docs/app/building-your-application/data-fetching/fetching-caching-and-revalidating
 async function fetchSupportData() {
-    const res = await fetch(
-        "https://raw.githubusercontent.com/una-eif509-desarrolloweb-master/taskapp-frontend-web-staticdata/main/static/support.json"
-    );
+    const res = await fetch(process.env.API_SUPPORT_DATA);
 
     if (!res.ok) {
         // This will activate the closest `error.js` Error Boundary
