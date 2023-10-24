@@ -306,3 +306,5 @@ sketch
 .idea/
 
 *.lock
+
+package-lock.json
