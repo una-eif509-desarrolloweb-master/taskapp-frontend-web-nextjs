@@ -1,6 +1,6 @@
 import TaskDetails from "@/app/tasks/[id]/components/TaskDetails";
 
-async function getTicket(id) {
+async function getTask(id) {
     const url = `${process.env.API_BACKEND_URL}/${id}`
     // This is SSR
     const res = await fetch(url, { cache: "no-store" })
@@ -13,7 +13,7 @@ async function getTicket(id) {
 }
 
 const TaskDetailsPage = async ({ params }) => {
-    const tasks = await getTicket(params.id)
+    const tasks = await getTask(params.id)
 
     if (!tasks) {
         notFound()
