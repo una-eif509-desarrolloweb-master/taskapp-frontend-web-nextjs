@@ -1,4 +1,4 @@
-import TaskDetails from "@/app/tasks/[id]/components/TaskDetails";
+import DeleteTask from "@/app/tasks/delete/[id]/components/DeleteTask";
 
 async function getTask(id) {
     const url = `${process.env.NEXT_PUBLIC_API_BACKEND_URL}/${id}`
@@ -12,18 +12,18 @@ async function getTask(id) {
     return res.json()
 }
 
-const TaskDetailsPage = async ({ params }) => {
-    const tasks = await getTask(params.id)
+const TaskDeletePage = async ({ params }) => {
+    const task = await getTask(params.id)
 
-    if (!tasks) {
+    if (!task) {
         notFound()
     }
 
     return (
-        <div className='pageGeneralClass'>
-            <TaskDetails task={tasks} />
+        <div className="pageGeneralClass">
+            <DeleteTask task={task} />
         </div>
     )
 }
 
-export default TaskDetailsPage
+export default TaskDeletePage

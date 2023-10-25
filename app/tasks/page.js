@@ -34,7 +34,7 @@ async function getTickets(url) {
 }
 
 const TicketsListPage = async ({searchParams}) => {
-    let url = process.env.API_BACKEND_URL;
+    let url = process.env.NEXT_PUBLIC_API_BACKEND_URL;
     if (searchParams.q) {
         url = `${url}?q=${searchParams.q}`;
     }
@@ -76,7 +76,12 @@ const TicketsListPage = async ({searchParams}) => {
                                         <PreviewIcon className='text-xl' />
                                     </Link>
                                     <EditIcon />
-                                    <DeleteIcon />
+                                    <Link
+                                        href={`/tasks/delete/${task.id}`}
+                                        className='bg-green-600 p-1 rounded-md mx-1'
+                                    >
+                                        <DeleteIcon className='text-xl' />
+                                    </Link>
                                 </TableCell>
                             </TableRow>
                         ))}
