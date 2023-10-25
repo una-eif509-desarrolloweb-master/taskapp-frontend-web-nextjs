@@ -9,6 +9,7 @@ import Paper from '@mui/material/Paper';
 import DeleteIcon from '@mui/icons-material/Delete';
 import PreviewIcon from '@mui/icons-material/Preview';
 import EditIcon from '@mui/icons-material/Edit';
+import Link from "next/link";
 
 export const metadata = {
     title: "Task List | TaskApp",
@@ -55,20 +56,25 @@ const TicketsListPage = async ({searchParams}) => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {tickets.map((row) => (
+                        {tickets.map((task) => (
                             <TableRow
-                                key={row.title}
+                                key={task.title}
                                 sx={{'&:last-child td, &:last-child th': {border: 0}}}
                             >
                                 <TableCell component="th" scope="row">
-                                    {row.title}
+                                    {task.title}
                                 </TableCell>
-                                <TableCell align="right">{row.notes}</TableCell>
-                                <TableCell align="right">{row.createDate}</TableCell>
-                                <TableCell align="right">{row.dueDate}</TableCell>
-                                <TableCell align="right">{row.status.label}</TableCell>
+                                <TableCell align="right">{task.notes}</TableCell>
+                                <TableCell align="right">{task.createDate}</TableCell>
+                                <TableCell align="right">{task.dueDate}</TableCell>
+                                <TableCell align="right">{task.status.label}</TableCell>
                                 <TableCell align="center">
-                                    <PreviewIcon />
+                                    <Link
+                                        href={`/tasks/${task.id}`}
+                                        className='bg-green-600 p-1 rounded-md mx-1'
+                                    >
+                                        <PreviewIcon className='text-xl' />
+                                    </Link>
                                     <EditIcon />
                                     <DeleteIcon />
                                 </TableCell>
