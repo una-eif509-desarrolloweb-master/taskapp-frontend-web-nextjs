@@ -8,7 +8,10 @@ import Paper from '@mui/material/Paper';
 import DeleteIcon from '@mui/icons-material/Delete';
 import PreviewIcon from '@mui/icons-material/Preview';
 import EditIcon from '@mui/icons-material/Edit';
+import AddBoxIcon from '@mui/icons-material/AddBox';
 import Link from "next/link";
+import {Button, Chip} from "@mui/material";
+import Divider from "@mui/material/Divider";
 
 export const metadata = {
     title: "Task List | TaskApp",
@@ -42,56 +45,65 @@ const TicketsListPage = async ({searchParams}) => {
 
     return (
         <>
-            <TableContainer component={Paper}>
-                <Table sx={{minWidth: 650}} aria-label="simple table">
-                    <TableHead>
-                        <TableRow>
-                            <TableCell>Title</TableCell>
-                            <TableCell align="right">Notes</TableCell>
-                            <TableCell align="right">Created</TableCell>
-                            <TableCell align="right">Due Date</TableCell>
-                            <TableCell align="right">Status</TableCell>
-                            <TableCell align="center">Operations</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {tickets.map((task) => (
-                            <TableRow
-                                key={task.title}
-                                sx={{'&:last-child td, &:last-child th': {border: 0}}}
-                            >
-                                <TableCell component="th" scope="row">
-                                    {task.title}
-                                </TableCell>
-                                <TableCell align="right">{task.notes}</TableCell>
-                                <TableCell align="right">{task.createDate}</TableCell>
-                                <TableCell align="right">{task.dueDate}</TableCell>
-                                <TableCell align="right">{task.status.label}</TableCell>
-                                <TableCell align="center">
-                                    <Link
-                                        href={`/tasks/${task.id}`}
-                                        className='bg-green-600 p-1 rounded-md mx-1'
-                                    >
-                                        <PreviewIcon className='text-xl'/>
-                                    </Link>
-                                    <Link
-                                        href={`/tasks/edit/${task.id}`}
-                                        className='bg-green-600 p-1 rounded-md mx-1'
-                                    >
-                                        <EditIcon className='text-xl'/>
-                                    </Link>
-                                    <Link
-                                        href={`/tasks/delete/${task.id}`}
-                                        className='bg-green-600 p-1 rounded-md mx-1'
-                                    >
-                                        <DeleteIcon className='text-xl'/>
-                                    </Link>
-                                </TableCell>
+            <div>
+                <Button variant="outlined" href={`/tasks/create/`} startIcon={<AddBoxIcon />}>
+                    Create new Task
+                </Button>
+                <Divider>
+                    <Chip label="Task List" />
+                </Divider>
+                <TableContainer component={Paper}>
+                    <Table sx={{minWidth: 650}} aria-label="simple table">
+                        <TableHead>
+                            <TableRow>
+                                <TableCell>Title</TableCell>
+                                <TableCell align="right">Notes</TableCell>
+                                <TableCell align="right">Created</TableCell>
+                                <TableCell align="right">Due Date</TableCell>
+                                <TableCell align="right">Status</TableCell>
+                                <TableCell align="center">Operations</TableCell>
                             </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-            </TableContainer>
+                        </TableHead>
+                        <TableBody>
+
+                            {tickets.map((task) => (
+                                <TableRow
+                                    key={task.title}
+                                    sx={{'&:last-child td, &:last-child th': {border: 0}}}
+                                >
+                                    <TableCell component="th" scope="row">
+                                        {task.title}
+                                    </TableCell>
+                                    <TableCell align="right">{task.notes}</TableCell>
+                                    <TableCell align="right">{task.createDate}</TableCell>
+                                    <TableCell align="right">{task.dueDate}</TableCell>
+                                    <TableCell align="right">{task.status.label}</TableCell>
+                                    <TableCell align="center">
+                                        <Link
+                                            href={`/tasks/${task.id}`}
+                                            className='bg-green-600 p-1 rounded-md mx-1'
+                                        >
+                                            <PreviewIcon className='text-xl'/>
+                                        </Link>
+                                        <Link
+                                            href={`/tasks/edit/${task.id}`}
+                                            className='bg-green-600 p-1 rounded-md mx-1'
+                                        >
+                                            <EditIcon className='text-xl'/>
+                                        </Link>
+                                        <Link
+                                            href={`/tasks/delete/${task.id}`}
+                                            className='bg-green-600 p-1 rounded-md mx-1'
+                                        >
+                                            <DeleteIcon className='text-xl'/>
+                                        </Link>
+                                    </TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            </div>
         </>
     );
 };

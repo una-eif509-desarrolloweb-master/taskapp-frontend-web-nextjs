@@ -3,12 +3,12 @@ import React, {useEffect, useState} from "react"
 import {useRouter} from "next/navigation"
 import {useForm} from "react-hook-form"
 import axios from "axios"
-import {Button, ButtonGroup, FormControl, InputLabel, MenuItem, Select, TextField} from "@mui/material";
-import style from "./editTaskForm.module.css";
 import Box from "@mui/material/Box";
+import {Button, ButtonGroup, FormControl, InputLabel, MenuItem, Select, TextField} from "@mui/material";
+import style from "./createTaskForm.module.css";
 
-const EditTaskForm = ({task: task}) => {
-    const [loading, setLoading] = useState(true)
+const CreateTaskForm = () => {
+    const [loading, setLoading] = useState(false)
     const router = useRouter()
 
     const form = useForm({})
@@ -19,10 +19,7 @@ const EditTaskForm = ({task: task}) => {
         console.log(data)
         try {
             setLoading(true)
-            await axios.put(
-                `${process.env.NEXT_PUBLIC_API_BACKEND_URL}/${task.id}`,
-                data
-            )
+            await axios.post(`${process.env.NEXT_PUBLIC_API_BACKEND_URL}`, data)
             router.push("/tasks")
             router.refresh()
         } catch (error) {
@@ -40,15 +37,10 @@ const EditTaskForm = ({task: task}) => {
         setValue("status", statusVal);
     };
 
-
     useEffect(() => {
         // For more info, Look at these values
-        console.log(task.id)
 
-        setValue("id", task.id);
-        setValue("title", task.title);
-        setValue("notes", task.notes);
-        setValue("status", task.status);
+        setValue("status", "");
         setLoading(false)
     }, [])
 
@@ -65,21 +57,9 @@ const EditTaskForm = ({task: task}) => {
                 >
                     <div>
                         <TextField
-                            id="taskId"
-                            label="Task Id"
-                            defaultValue={task.id}
-                            InputProps={{
-                                readOnly: true,
-                            }}
-                            variant="outlined"
-                        />
-                    </div>
-                    <div>
-                        <TextField
                             required
                             id="taskTitle"
                             label="Title"
-                            defaultValue={task.title}
                             variant="outlined"
                             {...register('title', {
                                 required: 'Title is required',
@@ -92,7 +72,6 @@ const EditTaskForm = ({task: task}) => {
                             required
                             id="taskNotes"
                             label="Notes"
-                            defaultValue={task.notes}
                             variant="outlined"
                             {...register('notes', {
                                 required: 'Notes is required',
@@ -110,11 +89,10 @@ const EditTaskForm = ({task: task}) => {
                             <Select
                                 labelId="taskStatusLbl"
                                 id="taskStatus"
-                                defaultValue={task.status.id}
                                 autoWidth
+                                defaultValue={0}
+                                label="Status"
                                 onChange={handleStatusChange}
-                                label={task.status.label}
-
                             >
                                 <MenuItem value={0}>ToDo</MenuItem>
                                 <MenuItem value={1}>Pending</MenuItem>
@@ -137,4 +115,4 @@ const EditTaskForm = ({task: task}) => {
     )
 }
 
-export default EditTaskForm
+export default CreateTaskForm
