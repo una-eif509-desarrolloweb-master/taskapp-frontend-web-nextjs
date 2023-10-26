@@ -1,4 +1,3 @@
-import styles from "./tasks.module.css";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -73,14 +72,14 @@ const TicketsListPage = async ({searchParams}) => {
                                         href={`/tasks/${task.id}`}
                                         className='bg-green-600 p-1 rounded-md mx-1'
                                     >
-                                        <PreviewIcon className='text-xl' />
+                                        <PreviewIcon className='text-xl'/>
                                     </Link>
-                                    <EditIcon />
+                                    <EditIcon/>
                                     <Link
                                         href={`/tasks/delete/${task.id}`}
                                         className='bg-green-600 p-1 rounded-md mx-1'
                                     >
-                                        <DeleteIcon className='text-xl' />
+                                        <DeleteIcon className='text-xl'/>
                                     </Link>
                                 </TableCell>
                             </TableRow>

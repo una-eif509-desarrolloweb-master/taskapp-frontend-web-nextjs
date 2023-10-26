@@ -3,7 +3,7 @@ import TaskDetails from "@/app/tasks/[id]/components/TaskDetails";
 async function getTask(id) {
     const url = `${process.env.NEXT_PUBLIC_API_BACKEND_URL}/${id}`
     // This is SSR
-    const res = await fetch(url, { cache: "no-store" })
+    const res = await fetch(url, {cache: "no-store"})
 
     if (!res.ok) {
         return undefined
@@ -12,7 +12,7 @@ async function getTask(id) {
     return res.json()
 }
 
-const TaskDetailsPage = async ({ params }) => {
+const TaskDetailsPage = async ({params}) => {
     const tasks = await getTask(params.id)
 
     if (!tasks) {
@@ -21,7 +21,7 @@ const TaskDetailsPage = async ({ params }) => {
 
     return (
         <div className='pageGeneralClass'>
-            <TaskDetails task={tasks} />
+            <TaskDetails task={tasks}/>
         </div>
     )
 }
