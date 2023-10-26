@@ -1,7 +1,7 @@
 import TaskDetails from "@/app/tasks/[id]/components/TaskDetails";
 
 async function getTask(id) {
-    const url = `${process.env.API_BACKEND_URL}/${id}`
+    const url = `${process.env.NEXT_PUBLIC_API_BACKEND_URL}/${id}`
     // This is SSR
     const res = await fetch(url, { cache: "no-store" })
 

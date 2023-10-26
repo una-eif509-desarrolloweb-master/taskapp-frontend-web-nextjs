@@ -34,7 +34,7 @@ async function getTickets(url) {
 }
 
 const TicketsListPage = async ({searchParams}) => {
-    let url = process.env.API_BACKEND_URL;
+    let url = process.env.NEXT_PUBLIC_API_BACKEND_URL;
     if (searchParams.q) {
         url = `${url}?q=${searchParams.q}`;
     }
