@@ -1,15 +1,15 @@
 "use client"
 import React from "react"
-import Link from "next/link"
 import Box from "@mui/material/Box";
 import {Button, ButtonGroup, TextField} from "@mui/material";
 import style from "./taskDetails.module.css"
+
 const TaskDetails = ({task}) => {
     return (
         <Box
             component="form"
             sx={{
-                '& .MuiTextField-root': { m: 1, width: '50ch' },
+                '& .MuiTextField-root': {m: 1, width: '50ch'},
             }}
             noValidate
             autoComplete="off"

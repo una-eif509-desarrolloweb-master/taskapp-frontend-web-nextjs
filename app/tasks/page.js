@@ -1,4 +1,3 @@
-import styles from "./tasks.module.css";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -23,7 +22,7 @@ export const metadata = {
 // CSR -> Client Side Rendering
 // This is an external API call, and it is better to be outside your component
 // But in this tutorial, we place it here for easier understanding
-async function getTickets(url) {
+async function getTasks(url) {
     // This is SSR
     const res = await fetch(url, {cache: 'no-store'});
     if (!res.ok) {
@@ -39,7 +38,7 @@ const TicketsListPage = async ({searchParams}) => {
         url = `${url}?q=${searchParams.q}`;
     }
     // Fetch data from url
-    const tickets = await getTickets(url);
+    const tasks = await getTasks(url);
 
     return (
         <>
@@ -56,7 +55,7 @@ const TicketsListPage = async ({searchParams}) => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {tickets.map((task) => (
+                        {tasks.map((task) => (
                             <TableRow
                                 key={task.title}
                                 sx={{'&:last-child td, &:last-child th': {border: 0}}}
