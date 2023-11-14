@@ -1,3 +1,5 @@
+"use client";
+
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -12,45 +14,50 @@ import AddBoxIcon from '@mui/icons-material/AddBox';
 import Link from "next/link";
 import {Button, Chip} from "@mui/material";
 import Divider from "@mui/material/Divider";
+import axiosInstance from "@/components/utils/axiosInstance";
+import {useEffect, useState} from "react";
 
-export const metadata = {
-    title: "Task List | TaskApp",
-    description: "Test Description for task list page"
-}
+/**
+ * Task List Page, displays a list of tasks
+ * This page is protected by authentication and using in client side
+ * @param searchParams
+ * @returns {JSX.Element}
+ * @constructor
+ */
+const TaskListPage = ({searchParams}) => {
 
-// As a Default Rule, All of your fetched data would be cached (SSG)
-// SSG -> Static Site Generation
-// ISR -> Incremental Site Regeneration
-// SSR -> Server Side Rendering
-// CSR -> Client Side Rendering
-// This is an external API call, and it is better to be outside your component
-// But in this tutorial, we place it here for easier understanding
-async function getTickets(url) {
-    // This is SSR
-    const res = await fetch(url, {cache: 'no-store'});
-    if (!res.ok) {
-        // This will activate the closest `error.js` Error Boundary
-        throw new Error('Failed to fetch data');
+    const [tasks, setTasks] = useState([]); // State to store tasks
+    const [loading, setLoading] = useState(true); // State to handle loading status
+
+    // Fetch tasks on mount using useEffect hook
+    useEffect(() => {
+        const fetchTasks = async () => {
+            try {
+                // We are using axiosInstance to make authenticated requests
+                const res = await axiosInstance.get('/tasks');
+                setTasks(res.data);
+                setLoading(false);
+            } catch (error) {
+                console.error('Error fetching tasks:', error);
+                setLoading(false);
+            }
+        };
+
+        fetchTasks().then(r => console.log(r));
+    }, []); // Empty dependency array means this effect runs once on mount
+
+    if (loading) {
+        return <div>Loading tasks...</div>;
     }
-    return res.json();
-}
-
-const TicketsListPage = async ({searchParams}) => {
-    let url = process.env.NEXT_PUBLIC_API_BACKEND_URL;
-    if (searchParams.q) {
-        url = `${url}?q=${searchParams.q}`;
-    }
-    // Fetch data from url
-    const tickets = await getTickets(url);
 
     return (
         <>
             <div>
-                <Button variant="outlined" href={`/tasks/create/`} startIcon={<AddBoxIcon />}>
+                <Button variant="outlined" href={`/admin/tasks/create/`} startIcon={<AddBoxIcon/>}>
                     Create new Task
                 </Button>
                 <Divider>
-                    <Chip label="Task List" />
+                    <Chip label="Task List"/>
                 </Divider>
                 <TableContainer component={Paper}>
                     <Table sx={{minWidth: 650}} aria-label="simple table">
@@ -66,7 +73,7 @@ const TicketsListPage = async ({searchParams}) => {
                         </TableHead>
                         <TableBody>
 
-                            {tickets.map((task) => (
+                            {tasks.map((task) => (
                                 <TableRow
                                     key={task.title}
                                     sx={{'&:last-child td, &:last-child th': {border: 0}}}
@@ -80,19 +87,19 @@ const TicketsListPage = async ({searchParams}) => {
                                     <TableCell align="right">{task.status.label}</TableCell>
                                     <TableCell align="center">
                                         <Link
-                                            href={`/tasks/${task.id}`}
+                                            href={`/admin/tasks/${task.id}`}
                                             className='bg-green-600 p-1 rounded-md mx-1'
                                         >
                                             <PreviewIcon className='text-xl'/>
                                         </Link>
                                         <Link
-                                            href={`/tasks/edit/${task.id}`}
+                                            href={`/admin/tasks/edit/${task.id}`}
                                             className='bg-green-600 p-1 rounded-md mx-1'
                                         >
                                             <EditIcon className='text-xl'/>
                                         </Link>
                                         <Link
-                                            href={`/tasks/delete/${task.id}`}
+                                            href={`/admin/tasks/delete/${task.id}`}
                                             className='bg-green-600 p-1 rounded-md mx-1'
                                         >
                                             <DeleteIcon className='text-xl'/>
@@ -108,4 +115,4 @@ const TicketsListPage = async ({searchParams}) => {
     );
 };
 
-export default TicketsListPage;
+export default TaskListPage;

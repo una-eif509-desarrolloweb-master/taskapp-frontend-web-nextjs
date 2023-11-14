@@ -1,5 +1,6 @@
 import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials";
+
 export const authOptions = {
     // Configure one or more authentication providers
     providers: [
@@ -17,25 +18,47 @@ export const authOptions = {
             },
             async authorize(credentials, req) {
                 const {username, password} = credentials;
-                const res = await fetch("http://localhost:8080/v1/users/login", {
+                const res = await fetch(`${process.env.NEXT_PUBLIC_API_BACKEND_URL}/users/login`, {
                     method: "POST",
                     body: JSON.stringify({username, password}),
                     headers: {"Content-Type": "application/json"}
                 })
 
-                const user = await res.json();
-                if (res.ok && user) {
-                    return user;
-                } else {
-                    return null;
+                const token = res.headers.get('Authorization'); // Get the Authorization header
+
+                if (token && token.startsWith('Bearer ')) {
+                    const user = await res.json()
+
+                    // Optionally, you might want to strip the 'Bearer ' prefix
+                    const bearerToken = token.substring(7);
+
+                    if (user) {
+                        // You can attach the token to the user object, or handle it as needed
+                        user.token = bearerToken;
+                        return user;
+                    } else {
+                        return null;
+                    }
                 }
+
             }
         })
     ],
 
-    session: {
-        strategy: "jwt"
-    }
+    callbacks: {
+        async jwt({token, user}) {
+            return {...token, ...user};
+        },
+        async session({session, token, user}) {
+            // Send properties to the client, like an access_token from a provider.
+            session.user = token;
+
+            return session;
+        },
+    },
+    pages: {
+        signIn: "/auth/login",
+    },
 }
 
 export default NextAuth(authOptions)

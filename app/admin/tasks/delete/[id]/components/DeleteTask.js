@@ -10,6 +10,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import axiosInstance from "@/components/utils/axiosInstance";
 
 const DeleteTicket = ({task: task}) => {
     const [open, setOpen] = useState(false);
@@ -19,9 +20,9 @@ const DeleteTicket = ({task: task}) => {
     const deleteHandlerFunction = async () => {
         try {
             setLoading(true)
-            await axios.delete(`${process.env.NEXT_PUBLIC_API_BACKEND_URL}/${task.id}`)
+            const response = await axiosInstance.delete(`/tasks/${task.id}`);
             setOpen(false);
-            router.push("/tasks")
+            router.push("/admin/tasks")
             router.refresh()
         } catch (error) {
             // Handled
@@ -109,8 +110,8 @@ const DeleteTicket = ({task: task}) => {
                 <div>
                     <TextField
                         id="standard-read-only-input"
-                        label="Date Created"
-                        defaultValue={task.createDate}
+                        label="Due Created"
+                        defaultValue={task.dueDate}
                         InputProps={{
                             readOnly: true,
                         }}
@@ -139,9 +140,20 @@ const DeleteTicket = ({task: task}) => {
                         variant="outlined"
                     />
                 </div>
+                <div>
+                    <TextField
+                        id="standard-read-only-input"
+                        label="Priority"
+                        defaultValue={task.priority.label}
+                        InputProps={{
+                            readOnly: true,
+                        }}
+                        variant="outlined"
+                    />
+                </div>
                 <div className={style.buttonsArea}>
                     <ButtonGroup variant="outlined" aria-label="outlined button group">
-                        <Button href={'/tasks'}>Cancel</Button>
+                        <Button href={'/admin/tasks'}>Cancel</Button>
                         <Button
                             onClick={handleClickOpen}>Delete</Button>
                     </ButtonGroup>

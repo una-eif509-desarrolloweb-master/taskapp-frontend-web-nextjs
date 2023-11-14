@@ -80,11 +80,22 @@ const TaskDetails = ({task}) => {
                     variant="outlined"
                 />
             </div>
+            <div>
+                <TextField
+                    id="standard-read-only-input"
+                    label="Priority"
+                    defaultValue={task.priority.label}
+                    InputProps={{
+                        readOnly: true,
+                    }}
+                    variant="outlined"
+                />
+            </div>
             <div className={style.buttonsArea}>
                 <ButtonGroup variant="outlined" aria-label="outlined button group">
-                    <Button href={'/tasks'}>Cancel</Button>
-                    <Button>Edit</Button>
-                    <Button>Delete</Button>
+                    <Button href={'/admin/tasks'}>Cancel</Button>
+                    <Button href={`/admin/tasks/edit/${task.id}`}>Edit</Button>
+                    <Button href={`/admin/tasks/delete/${task.id}`}>Delete</Button>
                 </ButtonGroup>
             </div>
         </Box>
