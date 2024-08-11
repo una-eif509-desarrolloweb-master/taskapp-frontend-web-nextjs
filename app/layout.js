@@ -1,13 +1,10 @@
-import {Open_Sans} from 'next/font/google'
+import { Inter } from "next/font/google";
 import Link from "next/link";
 
-import './globals.css'
+import "./globals.css";
 import styles from "./rootStyle.module.css";
 
-const inter = Open_Sans({
-    subsets: ['latin'],
-    weight: ["400"],
-})
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
     title: 'TaskApp Universidad Nacional de Costa Rica',
@@ -49,5 +46,5 @@ export default function RootLayout({children}) {
         </footer>
         </body>
         </html>
-    )
+    );
 }

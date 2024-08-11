@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 export default function Page() {
   return (
       <>
@@ -11,7 +9,7 @@ export default function Page() {
           </p>
           <p>Whether you are a beginner or an experienced coder, TaskAPP is the perfect tool to take your skills to the
               next level.
-              Let's get started!</p>
+              Let&#39;s get started!</p>
           <p>Universidad Nacional de Costa Rica</p>
       </>
   );
