@@ -109,9 +109,35 @@ Open [http://localhost:3000](http://localhost:3000) in your web browser to see t
 
 You can start editing the code by opening the project folder in Visual Studio Code. The main file to edit is `app/page.js`. When you save changes, the app will automatically update in your browser.
 
+## Installing and Using Docker Compose on Windows
+
+### 1. Install Docker Desktop
+
+Docker Desktop is the easiest way to get started with Docker and Docker Compose on Windows.
+
+- **Download Docker Desktop**: Go to the [Docker Desktop website](https://www.docker.com/products/docker-desktop) and download the installer for Windows.
+- **Install Docker Desktop**: Run the installer and follow the instructions.
+
+  During installation, make sure to enable the option to install the "Windows Subsystem for Linux 2 (WSL 2)" if prompted.
+
+### 2. Start Docker Desktop
+
+- After installation, launch Docker Desktop. You should see the Docker icon in your system tray (bottom-right corner of your screen).
+- Wait for Docker to start; the icon will indicate when it's ready.
+
+### 3. Verify Docker Compose Installation
+
+Docker Compose comes pre-installed with Docker Desktop, so you don't need to install it separately. To verify that Docker Compose is installed, open a Command Prompt or PowerShell window and run:
+
+```bash
+docker-compose --version
+```
+
+You should see the version of Docker Compose printed in the terminal.
+
 ## Running the App with Docker Compose
 
-You can also run this application using Docker Compose, which allows you to manage and run your application in containers.
+You can run this application using Docker Compose, which allows you to manage and run your application in containers.
 
 ### 1. Create a `Dockerfile`
 
@@ -253,3 +279,4 @@ Here are some resources to help you learn more about the technologies used in th
 - [React.js Documentation](https://reactjs.org/docs/getting-started.html) - Learn more about React.js.
 - [Next.js Documentation](https://nextjs.org/docs) - Learn more about Next.js.
 - [Heroku Documentation](https://devcenter.heroku.com/) - Learn more about deploying on Heroku.
+
