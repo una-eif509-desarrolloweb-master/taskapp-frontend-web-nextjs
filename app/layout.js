@@ -12,7 +12,6 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import HomeIcon from '@mui/icons-material/Home';
-import StarIcon from '@mui/icons-material/Star';
 import ChecklistIcon from '@mui/icons-material/Checklist';
 import SettingsIcon from '@mui/icons-material/Settings';
 import SupportIcon from '@mui/icons-material/Support';
@@ -27,24 +26,24 @@ export const metadata = {
 const DRAWER_WIDTH = 240;
 
 const LINKS = [
-    { text: 'Home', href: '/', icon: HomeIcon },
-    { text: 'Tasks', href: '/tasks', icon: ChecklistIcon },
+    {text: 'Home', href: '/', icon: HomeIcon},
+    {text: 'Tasks', href: '/tasks', icon: ChecklistIcon},
 ];
 
 const PLACEHOLDER_LINKS = [
-    { text: 'Settings', href: '/settings', icon: SettingsIcon },
-    { text: 'Support', href: '/support', icon: SupportIcon },
-    { text: 'Logout', icon: LogoutIcon },
+    {text: 'Settings', href: '/settings', icon: SettingsIcon},
+    {text: 'Support', href: '/support', icon: SupportIcon},
+    {text: 'Logout', icon: LogoutIcon},
 ];
 
-export default function RootLayout({ children }) {
+export default function RootLayout({children}) {
     return (
         <html lang="en">
         <body>
         <ThemeRegistry>
-            <AppBar position="fixed" sx={{ zIndex: 2000 }}>
-                <Toolbar sx={{ backgroundColor: 'background.paper' }}>
-                    <DashboardIcon sx={{ color: '#444', mr: 2, transform: 'translateY(-2px)' }} />
+            <AppBar position="fixed" sx={{zIndex: 2000}}>
+                <Toolbar sx={{backgroundColor: 'background.paper'}}>
+                    <DashboardIcon sx={{color: '#444', mr: 2, transform: 'translateY(-2px)'}}/>
                     <Typography variant="h6" noWrap component="div" color="black">
                         Task App | Universidad de Nacional de Costa Rica
                     </Typography>
@@ -65,28 +64,28 @@ export default function RootLayout({ children }) {
                 variant="permanent"
                 anchor="left"
             >
-                <Divider />
+                <Divider/>
                 <List>
-                    {LINKS.map(({ text, href, icon: Icon }) => (
+                    {LINKS.map(({text, href, icon: Icon}) => (
                         <ListItem key={href} disablePadding>
                             <ListItemButton component={Link} href={href}>
                                 <ListItemIcon>
-                                    <Icon />
+                                    <Icon/>
                                 </ListItemIcon>
-                                <ListItemText primary={text} />
+                                <ListItemText primary={text}/>
                             </ListItemButton>
                         </ListItem>
                     ))}
                 </List>
-                <Divider sx={{ mt: 'auto' }} />
+                <Divider sx={{mt: 'auto'}}/>
                 <List>
-                    {PLACEHOLDER_LINKS.map(({ text, href, icon: Icon }) => (
+                    {PLACEHOLDER_LINKS.map(({text, href, icon: Icon}) => (
                         <ListItem key={text} disablePadding>
                             <ListItemButton href={href}>
                                 <ListItemIcon>
-                                    <Icon />
+                                    <Icon/>
                                 </ListItemIcon>
-                                <ListItemText primary={text} />
+                                <ListItemText primary={text}/>
                             </ListItemButton>
                         </ListItem>
                     ))}
