@@ -94,7 +94,9 @@ const TicketsListPage = async ({searchParams}) => {
                                     <PreviewIcon className='text-xl'/>
                                 </Link>
                                 <EditIcon className='mx-1 text-blue-600'/>
-                                <DeleteIcon className='mx-1 text-red-600'/>
+                                <Link href={`/tasks/delete/${task.id}`} className='bg-green-600 p-1 rounded-md mx-1'>
+                                    <DeleteIcon className='text-xl'/>
+                                </Link>
                             </TableCell>
                         </TableRow>
                     ))}
