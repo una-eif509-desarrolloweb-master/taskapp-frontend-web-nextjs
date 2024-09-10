@@ -4,3 +4,11 @@
   width: 100%;
   height: 100%;
 }
+
+.label {
+  font-weight: bold;
+}
+
+.infoContainer {
+  /* Add your styles for infoContainer here */
+}
